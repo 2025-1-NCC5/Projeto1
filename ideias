@@ -1,19 +1,17 @@
 
-Otimizar experiência do cliente que utiliza app de corrida
-Precisamos passar a credibilidade com IA
-
-Mostrar o preço em cada APP (Uber, 99, taxi etc)
-
+- Criar modelos de Machine Learning capazes de prever o preço estimado de corridas
+- Categorias: UberX, Uber Confort e Uber Black
+- Utilizar dados de outros aplicativos de corrida ou transporte público
 
 
 No Git:
 ------------------------
-Nome da Empresa: VUCA - Vai Uma Corrida Ai? e "Volatilidade, Incerteza, Complexidade e Ambiguidade" 
+Nome da Empresa: UbaRun
 
 
 Cargos
-Product Owner: Bruno Dourado
-Scrum Master: Vitor Tokunaga
+Product Owner: Guilherme Oliveira
+Scrum Master: Giulia Nogueira
 
 
 UML do sistema: 
