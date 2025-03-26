@@ -4,9 +4,9 @@
 <a href= "https://www.fecap.br/"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhZPrRa89Kma0ZZogxm0pi-tCn_TLKeHGVxywp-LXAFGR3B1DPouAJYHgKZGV0XTEf4AE&usqp=CAU" alt="FECAP - Fundação de Comércio Álvares Penteado" border="0"></a>
 </p>
 
-# Nome do Projeto
-s
-## Nome do Grupo
+# UBA Run - Estimador de preços de corridas
+
+## Grupo Uba
 
 ## Integrantes: <a href="https://github.com/GuiAlvesOliveira">Guilherme Alves de Olveira</a>, <a href="https://github.com/jjoaoplp">João Pedro Lima Paulo</a>, <a href="https://github.com/laramarina">Lara Marina</a>, <a href="https://github.com/Biaa099">Beaztriz Castilho</a>, <a href="https://github.com/GiuNogueiraSa">Giulia Nogueira</a>
 
@@ -20,12 +20,15 @@ s
 </p>
 
 
-De um a dois parágrafos sobre o que é seu projeto e o que ele faz.
+UBA Run é uma empresa que quer entregar o melhor do mercado de estimador de preços de aplicativos de carona.
 <br><br>
-Meu projeto ajuda estudantes FECAP a configurarem seus githubs.
+Nosso foco é melhorar e tornar mais rápida e eficiente sua solicitação de automovel de aplicativos de corrida.
 <br><br>
-May the force be with you!
+Nossa solução para isso é criar um software que calcule os valores e apresente para o cliente final como está principalmente o valor de cada aplicativo existente.
 <br><br>
+Deste modo o cliente consiguirá escolher a saída que melhor se encaixa para o seu uso pessoal.
+<br><br>
+
 
 ## 🛠 Estrutura de pastas
 
