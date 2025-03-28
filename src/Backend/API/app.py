@@ -78,7 +78,9 @@ def hello():
 @ns_auth.route("/register")
 class Register(Resource):
     @api.expect(api.model("User", {
+        "name": fields.String(required=True),
         "email": fields.String(required=True),
+        "phone": fields.String(required=True),
         "password": fields.String(required=True),
     }))
     def post(self):
@@ -88,14 +90,23 @@ class Register(Resource):
         if errors:
             return errors, 400
         
-        email = data["email"]
-        password = data["password"]
+        name  = data.get("name")
+        email = data.get("email")
+        phone = data.get("phone")
+        password = data.get("password")
         
         try:
-            user = auth.create_user(email=email, password=password)
-            return {"uid": user.uid, "email": user.email}, 201
+            user = auth.create_user(
+                email=email, 
+                password=password,
+                display_name=name,  # Set the user's name
+                phone_number=phone  # Set the user's phone number
+            )
+            return {"uid": user.uid, "email": user.email, "name": user.display_name, "phone": user.phone_number}, 201
         except auth.EmailAlreadyExistsError:
             return {"message": "Email already exists"}, 409
+        except auth.PhoneNumberAlreadyExistsError:
+            return {"message": "Phone number already exists"}, 409
         except Exception as e:
             return {"message": str(e)}, 400
         
@@ -158,10 +169,21 @@ def get_ride(rideId):
     ride = ride_ref.get()
     if ride.exists:
         ride_data = ride.to_dict()
-        if ride_data["uid"] != request.user["uid"]:  
-            return jsonify({"message": "Access denied"}), 403
         return jsonify(ride_data), 200
     return jsonify({"message": "Ride not found"}), 404
+
+
+@app.route('/rides/<rideId>', methods=['DELETE'])
+@token_required
+def delete_ride(rideId):
+    ride_ref = db.collection('rides').document(rideId)
+    ride = ride_ref.get()
+    if ride.exists:
+        ride_ref.delete()
+        return jsonify({"message": "Ride deleted"}), 200
+    return jsonify({"message": "Ride not found"}), 404
+
+
 
 
 

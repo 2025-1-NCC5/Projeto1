@@ -12,8 +12,11 @@ class RideSchema(Schema):
 
 
 class UserSchema(Schema):
+    name = fields.String(required=True)
     email = fields.Email(required=True)
+    phone = fields.String(required=True)
     password = fields.String(
         required=True,
         validate=validate.Length(min=8, error="Password must be at least 8 characters")
     )
+    
