@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "381017321474",
+    "project_id": "ubarun-9a206",
+    "storage_bucket": "ubarun-9a206.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:381017321474:android:79f73465ee5dbaa8c7f71b",
+        "android_client_info": {
+          "package_name": "com.example.pi_5ccomp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "381017321474-4mobfc2umcbiuc5fb731oaf22oept7gn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDYaBWXR4-S6nP8AqzBnl6GbT2lFoFHWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "381017321474-4mobfc2umcbiuc5fb731oaf22oept7gn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

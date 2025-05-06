@@ -3,6 +3,8 @@ import 'package:pi_5ccomp/components/decoration_auth.dart';
 import 'package:pi_5ccomp/screens/authentication/registration_page.dart';
 import 'package:pi_5ccomp/screens/home.dart';
 
+import '../../services/auth_services.dart';
+
 
 
 //LOGIN PAGE
@@ -14,11 +16,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  // Controladores de texto
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(1000, 28, 140, 164),
+      backgroundColor: const Color.fromARGB(1000, 28, 140, 164),
       body: Padding(
         padding: const EdgeInsets.all(40.0),
         child: Form(
@@ -41,13 +46,11 @@ class _LoginPageState extends State<LoginPage> {
                     MaterialPageRoute(builder: (context) => RegistrationPage()),
                   );
                 },
-                style: TextButton.styleFrom(
-                    foregroundColor: Colors.white,
-                ),
-                child: Text("É novo por aqui? Registre-se"),
+                style: TextButton.styleFrom(foregroundColor: Colors.white),
+                child: const Text("É novo por aqui? Registre-se"),
               ),
               const SizedBox(height: 60),
-              Align(
+              const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "E-mail",
@@ -55,10 +58,11 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               TextFormField(
+                controller: emailController,
                 decoration: getAuthenticationInputDecoration("Digite seu email"),
               ),
               const SizedBox(height: 30),
-              Align(
+              const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "Senha",
@@ -66,30 +70,48 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               TextFormField(
+                controller: passwordController,
                 decoration: getAuthenticationInputDecoration("Digite sua senha"),
                 obscureText: true,
               ),
               const SizedBox(height: 50),
               ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                    context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                  );
-                  },
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: Size(180, 50),
-                      backgroundColor: Color.fromARGB(1000, 217, 217, 217),
-                      foregroundColor: Color.fromARGB(1000, 28, 140, 164),
-                      elevation: 4,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                    ),
-                  child: Text("Login"),
+                onPressed: () {
+                  signIn();
+                },
+                style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(180, 50),
+                  backgroundColor: const Color.fromARGB(1000, 217, 217, 217),
+                  foregroundColor: const Color.fromARGB(1000, 28, 140, 164),
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
                 ),
+                child: const Text("Login"),
+              ),
             ],
           ),
         ),
       ),
     );
   }
+
+  void signIn() async {
+    final email = emailController.text.trim();
+    final password = passwordController.text;
+
+    try {
+      await authService.value.signIn(email: email, password: password);
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomePage()),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Erro ao fazer login: $e")),
+      );
+    }
+  }
 }
+
+
