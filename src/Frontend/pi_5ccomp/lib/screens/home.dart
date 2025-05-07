@@ -4,6 +4,9 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'alterar_senha.dart';
+import 'historicoViagens_Page.dart';
+
 final TextEditingController origemController = TextEditingController();
 final TextEditingController destinoController = TextEditingController();
 
@@ -36,9 +39,6 @@ class HomePage extends StatelessWidget {
           "destination": destino,
         }),
       );
-
-      print("Status da resposta da API Flask: ${response.statusCode}");
-      print("Resposta da API Flask: ${response.body}");
 
       if (response.statusCode == 200) {
         final result = json.decode(response.body);
@@ -91,8 +91,68 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 28, 140, 164),
+              ),
+              child: Text(
+                'Menu',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Página Inicial'),
+              onTap: () {
+                Navigator.pop(context); // fecha o menu
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.history),
+              title: Text('Histórico de Viagens'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HistoricoViagensPage()),
+                );
+              },
+            ),
+
+            ListTile(
+              leading: Icon(Icons.lock_reset),
+              title: Text('Alterar Senha'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AlterarSenhaPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: Text('Sair'),
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.of(context).pushReplacementNamed('/');
+              },
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
-        title: Text("Página Principal"),
+        title: Text(""),
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: Icon(Icons.menu),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
+        ),
         actions: [
           IconButton(
             icon: Icon(Icons.history),
@@ -168,63 +228,6 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class HistoricoViagensPage extends StatelessWidget {
-  const HistoricoViagensPage({super.key});
-
-  Future<List<Map<String, dynamic>>> buscarHistoricoUsuario() async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user == null) return [];
-
-    final snapshot = await FirebaseFirestore.instance
-        .collection('viagens')
-        .where('uid', isEqualTo: user.uid)
-        .orderBy('timestamp', descending: true)
-        .get();
-
-    return snapshot.docs
-        .map((doc) => doc.data() as Map<String, dynamic>)
-        .toList();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Histórico de Viagens')),
-      body: FutureBuilder<List<Map<String, dynamic>>>(
-        future: buscarHistoricoUsuario(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          }
-
-          if (snapshot.hasError) {
-            return Center(child: Text('Erro: ${snapshot.error}'));
-          }
-
-          final viagens = snapshot.data ?? [];
-
-          if (viagens.isEmpty) {
-            return Center(child: Text('Nenhuma viagem encontrada.'));
-          }
-
-          return ListView.builder(
-            itemCount: viagens.length,
-            itemBuilder: (context, index) {
-              final viagem = viagens[index];
-              return ListTile(
-                leading: Icon(Icons.location_on),
-                title: Text('${viagem['origem']} → ${viagem['destino']}'),
-                subtitle: Text(
-                    'R\$ ${viagem['preco_estimado']?.toStringAsFixed(2)} - ${(viagem['distancia_metros'] / 1000).toStringAsFixed(2)} km'),
-              );
-            },
-          );
-        },
       ),
     );
   }

@@ -2,12 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pi_5ccomp/components/decoration_auth.dart';
 import 'package:pi_5ccomp/screens/authentication/registration_page.dart';
 import 'package:pi_5ccomp/screens/home.dart';
-
 import '../../services/auth_services.dart';
 
-
-
-//LOGIN PAGE
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key, required String title});
 
@@ -16,7 +12,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // Controladores de texto
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -74,7 +69,15 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: getAuthenticationInputDecoration("Digite sua senha"),
                 obscureText: true,
               ),
-              const SizedBox(height: 50),
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () => recuperarSenha(),
+                  style: TextButton.styleFrom(foregroundColor: Colors.white),
+                  child: const Text("Esqueci minha senha"),
+                ),
+              ),
+              const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () {
                   signIn();
@@ -112,6 +115,26 @@ class _LoginPageState extends State<LoginPage> {
       );
     }
   }
+
+  void recuperarSenha() async {
+    final email = emailController.text.trim();
+
+    if (email.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Digite seu e-mail para recuperar a senha.")),
+      );
+      return;
+    }
+
+    try {
+      await authService.value.resetPassword(email: email);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("E-mail de recuperação enviado! Verifique sua caixa de entrada.")),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Erro ao enviar e-mail: $e")),
+      );
+    }
+  }
 }
-
-
