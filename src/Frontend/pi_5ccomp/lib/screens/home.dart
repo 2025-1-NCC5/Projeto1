@@ -246,7 +246,7 @@ class _HomePageState extends State<HomePage> {
               GestureDetector(
                 onTap: mostrarDialogoEscolhaApp,
                 child: Container(
-                  width: double.infinity, // 🔥 isso faz ocupar toda a largura
+                  width: double.infinity,
                   margin: const EdgeInsets.only(top: 30),
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
