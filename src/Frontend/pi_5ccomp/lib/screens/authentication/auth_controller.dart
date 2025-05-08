@@ -7,7 +7,7 @@ class AuthController {
     await Future.delayed(Duration(seconds: 6));
     Navigator.pushReplacement(context,MaterialPageRoute<void>(
         builder: (BuildContext context) =>
-            LoginPage(title: "Home page"))//Direciona para proxima tela
+            LoginPage(title: "Home page"))
     );
   }
 }
