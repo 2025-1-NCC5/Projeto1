@@ -140,6 +140,16 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void navegar(BuildContext context, Widget page) {
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => page,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(opacity: animation, child: child);
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -171,7 +181,10 @@ class _HomePageState extends State<HomePage> {
               title: Text('Histórico de Viagens'),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HistoricoViagensPage()));
+                Future.delayed(Duration(milliseconds: 300));
+                {
+                  navegar(context, HistoricoViagensPage());
+                }
               },
             ),
             ListTile(
@@ -179,7 +192,10 @@ class _HomePageState extends State<HomePage> {
               title: Text('Alterar Senha'),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const AlterarSenhaPage()));
+                Future.delayed(Duration(milliseconds: 300));
+                {
+                  navegar(context, AlterarSenhaPage());
+                }
               },
             ),
             ListTile(

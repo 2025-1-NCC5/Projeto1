@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pi_5ccomp/screens/authentication/auth_controller.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -16,10 +17,10 @@ class SplashPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Image.asset("assets/logo_preta.png", height: 128),
-          const Text(
+          Text(
             "Seu estimador de preços de corridas favorito!",
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: GoogleFonts.leagueSpartan(
               fontSize: 25,
               fontWeight: FontWeight.bold,
               color: Colors.black,
