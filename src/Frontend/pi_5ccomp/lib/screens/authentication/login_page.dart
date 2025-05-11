@@ -42,8 +42,27 @@ class _LoginPageState extends State<LoginPage> {
                   );
                 },
                 style: TextButton.styleFrom(foregroundColor: Colors.white),
-                child: const Text("É novo por aqui? Registre-se"),
-              ),
+                child: RichText(
+                  text: TextSpan(
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: "É novo por aqui?",
+                        ),
+                        TextSpan(
+                          text: " Registre-se!",
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              decorationColor: Colors.white,
+                              decorationThickness: 2.0,
+                            ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               const SizedBox(height: 60),
               const Align(
                 alignment: Alignment.centerLeft,

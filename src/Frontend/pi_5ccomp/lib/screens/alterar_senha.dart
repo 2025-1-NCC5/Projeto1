@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:pi_5ccomp/services/auth_services.dart'; // Ajuste o caminho conforme sua estrutura de pastas
+import 'package:pi_5ccomp/services/auth_services.dart';
+import '../components/decoration_auth.dart'; // Ajuste o caminho conforme sua estrutura de pastas
 
 class AlterarSenhaPage extends StatefulWidget {
   const AlterarSenhaPage({super.key});
@@ -84,43 +85,40 @@ class _AlterarSenhaPageState extends State<AlterarSenhaPage> {
     return Scaffold(
       appBar: AppBar(title: const Text("Alterar Senha")),
       body: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.only(top: 20.0, left: 30, right: 30),
         child: Form(
           key: _formKey,
           child: Column(
             children: [
+              Image.asset('assets/logo_preta.png',
+                  height: 80),
+              const SizedBox(height: 30),
               TextFormField(
                 controller: _senhaAtualController,
                 obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: "Senha Atual",
-                  border: OutlineInputBorder(),
-                ),
+                decoration: getAuthenticationInputDecoration("Senha Atual")
               ),
               const SizedBox(height: 20),
               TextFormField(
                 controller: _novaSenhaController,
                 obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: "Nova Senha",
-                  border: OutlineInputBorder(),
-                ),
+                decoration: getAuthenticationInputDecoration("Nova Senha")
               ),
               const SizedBox(height: 20),
               TextFormField(
                 controller: _confirmarSenhaController,
                 obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: "Confirmar Nova Senha",
-                  border: OutlineInputBorder(),
-                ),
+                decoration: getAuthenticationInputDecoration("Confirmar Nova Senha")
               ),
               const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: _alterarSenha,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 28, 140, 164),
-                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 16),
+                  fixedSize: const Size(180, 50),
+                  backgroundColor: const Color.fromARGB(1000, 28, 140, 164),
+                  foregroundColor: Colors.white,
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
                 ),
                 child: const Text("Alterar Senha"),
               ),

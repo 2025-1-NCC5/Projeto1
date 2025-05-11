@@ -46,7 +46,26 @@ class RegistrationPage extends StatelessWidget {
                     );
                   },
                   style: TextButton.styleFrom(foregroundColor: Colors.white),
-                  child: const Text("Já possui cadastro? Entre aqui"),
+                  child: RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: "Já possui cadastro?",
+                        ),
+                        TextSpan(
+                          text: " Entre aqui!",
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            decorationColor: Colors.white,
+                            decorationThickness: 2.0,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 20),
                 const Align(

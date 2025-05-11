@@ -128,7 +128,9 @@ class HistoricoViagensPage extends StatelessWidget {
         .snapshots();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Histórico de Viagens')),
+      appBar: AppBar(
+          title: const Text('Histórico de Viagens'),
+      ),
       body: Stack(
         children: [
           StreamBuilder<QuerySnapshot>(
@@ -176,7 +178,11 @@ class HistoricoViagensPage extends StatelessWidget {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Icon(Icons.location_on, size: 32),
+                          Padding(padding: EdgeInsets.only(top: 15),
+                          child: const Icon(
+                              Icons.location_on,
+                              size: 32,),
+                  ),
                           const SizedBox(width: 12),
                           Expanded(
                             child: Column(
@@ -189,7 +195,8 @@ class HistoricoViagensPage extends StatelessWidget {
                             ),
                           ),
                           IconButton(
-                            icon: const Icon(Icons.delete, color: Colors.red),
+                            padding: EdgeInsets.only(top: 20, left: 10),
+                            icon: const Icon(Icons.delete, color: Color.fromARGB(255, 28, 140, 164)),
                             onPressed: () => confirmarExclusaoIndividual(context, doc.id),
                           ),
                         ],
@@ -204,9 +211,9 @@ class HistoricoViagensPage extends StatelessWidget {
             bottom: 20,
             left: 20,
             child: FloatingActionButton(
-              backgroundColor: Colors.red,
+              backgroundColor: Color.fromARGB(255, 28, 140, 164),
               onPressed: () => confirmarExclusaoTotal(context, uid),
-              child: const Icon(Icons.delete),
+              child: const Icon(Icons.delete, color: Colors.white,),
             ),
           ),
         ],

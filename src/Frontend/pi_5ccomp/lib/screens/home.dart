@@ -20,8 +20,10 @@ class _HomePageState extends State<HomePage> {
   final origemController = TextEditingController();
   final destinoController = TextEditingController();
 
-  double? preco;
-  double? distancia;
+  double? precoUber;
+  double? distanciaUber;
+  double? preco99;
+  double? distancia99;
 
   Future<void> calcularPrecoViagem(BuildContext context) async {
     final origem = origemController.text;
@@ -62,8 +64,11 @@ class _HomePageState extends State<HomePage> {
         }
 
         setState(() {
-          preco = precoValor;
-          distancia = distanciaValor;
+          precoUber = precoValor;
+          distanciaUber = distanciaValor;
+
+          preco99 = precoValor;
+          distancia99 = distanciaValor;
         });
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -97,12 +102,12 @@ class _HomePageState extends State<HomePage> {
   }
 
 
-  void mostrarDialogoEscolhaApp() {
+  void mostrarDialogoUber() {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: Text('Abrir com...'),
-        content: Text('Deseja abrir a corrida com qual app?'),
+        title: Text('Ir para...'),
+        content: Text('Deseja abrir a corrida diretamente no app?'),
         actions: [
           TextButton(
             onPressed: () {
@@ -111,6 +116,18 @@ class _HomePageState extends State<HomePage> {
             },
             child: Text('Uber'),
           ),
+        ],
+      ),
+    );
+  }
+
+  void mostrarDialogo99() {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text('Ir para...'),
+        content: Text('Deseja abrir a corrida diretamente no app?'),
+        actions: [
           TextButton(
             onPressed: () {
               Navigator.pop(context);
@@ -131,9 +148,18 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(color: Color.fromARGB(255, 28, 140, 164)),
-              child: Text('Menu', style: TextStyle(color: Colors.white, fontSize: 24)),
+            Container(
+              height: 120,
+              padding: EdgeInsets.only(top: 40),
+              color: Color.fromARGB(255, 28, 140, 164),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset('assets/logo_cinza.png',
+                  height: 80),
+                ],
+              )
             ),
             ListTile(
               leading: Icon(Icons.home),
@@ -168,24 +194,18 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       appBar: AppBar(
-        title: Text(""),
+        title: Image.asset('assets/logo_preta.png',
+            height: 60),
+        centerTitle: true,
         leading: Builder(
           builder: (context) => IconButton(
-            icon: Icon(Icons.menu),
+            icon: Icon(Icons.menu, color: Color.fromARGB(1000, 28, 140, 164),),
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.history),
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => HistoricoViagensPage()));
-            },
-          ),
-        ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(40.0),
+        padding: EdgeInsets.only(left: 30, right: 30, top: 30),
         child: Column(
           children: [
             Row(
@@ -226,7 +246,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 30.0),
+                  padding: const EdgeInsets.only(top: 4.0),
                   child: Container(
                     height: 50,
                     width: 50,
@@ -242,30 +262,83 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            if (preco != null && distancia != null)
-              GestureDetector(
-                onTap: mostrarDialogoEscolhaApp,
-                child: Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.only(top: 30),
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 3)),
-                    ],
+            if (precoUber != null && distanciaUber != null && preco99 != null && distancia99 != null)
+              Column(
+                children: [
+                  //UBER
+                  GestureDetector(
+                    onTap: mostrarDialogoUber,
+                    child: Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.only(top: 30),
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 3)),
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: Image.asset('assets/logo_uber.png',
+                                height: 50,
+                                width: 40),
+                          ),
+                          SizedBox(height: 25),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Uber', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                                Text('Distância: ${(distanciaUber! / 1000).toStringAsFixed(2)} km'),
+                              ],
+                            ),
+                          ),
+                          Text('R\$ ${precoUber!.toStringAsFixed(2)}', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 16)),
+                        ],
+                      ),
+                    ),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Preço estimado', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                      SizedBox(height: 8),
-                      Text('R\$ ${preco!.toStringAsFixed(2)}'),
-                      Text('Distância: ${(distancia! / 1000).toStringAsFixed(2)} km'),
-                    ],
+                  //99APP
+                  GestureDetector(
+                    onTap: mostrarDialogo99,
+                    child: Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.only(top: 30),
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 3)),
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: Image.asset('assets/logo99.png',
+                                height: 30,
+                                width: 40),
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('99 Taxi', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                                Text('Distância: ${(distancia99! / 1000).toStringAsFixed(2)} km'),
+                              ],
+                            ),
+                          ),
+                          Text('R\$ ${preco99!.toStringAsFixed(2)}', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 16)),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
           ],
         ),
