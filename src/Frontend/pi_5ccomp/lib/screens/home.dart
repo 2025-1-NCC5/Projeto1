@@ -220,144 +220,167 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.only(left: 30, right: 30, top: 30),
-        child: Column(
-          children: [
-            Row(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 30, left: 30),
+            child: Text(
+              "Economize na sua próxima corrida!",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              )
+    ),
+          ),
+          Padding(
+              padding: const EdgeInsets.only(left: 30),
+            child: Text(
+                "Comparamos prços de aplicativos de corridas para você",
+                style: TextStyle(
+                  fontSize: 12,
+                )
+            ),),
+          Padding(
+            padding: EdgeInsets.only(left: 30, right: 30, top: 40),
+            child: Column(
               children: [
-                Expanded(
-                  child: Column(
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            controller: origemController,
+                            decoration: InputDecoration(
+                              hintText: "Local Inicial",
+                              filled: true,
+                              fillColor: Color.fromARGB(1000, 217, 217, 217),
+                              prefixIcon: Icon(Icons.search),
+                              contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: BorderSide.none,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: destinoController,
+                            decoration: InputDecoration(
+                              hintText: "Destino Final",
+                              filled: true,
+                              fillColor: Color.fromARGB(1000, 217, 217, 217),
+                              prefixIcon: Icon(Icons.location_pin),
+                              contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: BorderSide.none,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4.0),
+                      child: Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(1000, 28, 140, 164),
+                          shape: BoxShape.circle,
+                        ),
+                        child: IconButton(
+                          icon: Icon(Icons.search, color: Colors.white),
+                          onPressed: () => calcularPrecoViagem(context),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                if (precoUber != null && distanciaUber != null && preco99 != null && distancia99 != null)
+                  Column(
                     children: [
-                      TextFormField(
-                        controller: origemController,
-                        decoration: InputDecoration(
-                          hintText: "Local Inicial",
-                          filled: true,
-                          fillColor: Color.fromARGB(1000, 217, 217, 217),
-                          prefixIcon: Icon(Icons.search),
-                          contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide.none,
+                      //UBER
+                      GestureDetector(
+                        onTap: mostrarDialogoUber,
+                        child: Container(
+                          width: double.infinity,
+                          margin: const EdgeInsets.only(top: 30),
+                          padding: const EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 3)),
+                            ],
+                          ),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: Image.asset('assets/logo_uber.png',
+                                    height: 50,
+                                    width: 40),
+                              ),
+                              SizedBox(height: 25),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Uber', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                                    Text('Distância: ${(distanciaUber! / 1000).toStringAsFixed(2)} km'),
+                                  ],
+                                ),
+                              ),
+                              Text('R\$ ${precoUber!.toStringAsFixed(2)}', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 16)),
+                            ],
                           ),
                         ),
                       ),
-                      const SizedBox(height: 10),
-                      TextFormField(
-                        controller: destinoController,
-                        decoration: InputDecoration(
-                          hintText: "Destino Final",
-                          filled: true,
-                          fillColor: Color.fromARGB(1000, 217, 217, 217),
-                          prefixIcon: Icon(Icons.location_pin),
-                          contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide.none,
+                      //99APP
+                      GestureDetector(
+                        onTap: mostrarDialogo99,
+                        child: Container(
+                          width: double.infinity,
+                          margin: const EdgeInsets.only(top: 30),
+                          padding: const EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 3)),
+                            ],
+                          ),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: Image.asset('assets/logo99.png',
+                                    height: 30,
+                                    width: 40),
+                              ),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('99 Taxi', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                                    Text('Distância: ${(distancia99! / 1000).toStringAsFixed(2)} km'),
+                                  ],
+                                ),
+                              ),
+                              Text('R\$ ${preco99!.toStringAsFixed(2)}', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 16)),
+                            ],
                           ),
                         ),
                       ),
                     ],
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 4.0),
-                  child: Container(
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(1000, 28, 140, 164),
-                      shape: BoxShape.circle,
-                    ),
-                    child: IconButton(
-                      icon: Icon(Icons.search, color: Colors.white),
-                      onPressed: () => calcularPrecoViagem(context),
-                    ),
-                  ),
-                ),
               ],
             ),
-            if (precoUber != null && distanciaUber != null && preco99 != null && distancia99 != null)
-              Column(
-                children: [
-                  //UBER
-                  GestureDetector(
-                    onTap: mostrarDialogoUber,
-                    child: Container(
-                      width: double.infinity,
-                      margin: const EdgeInsets.only(top: 30),
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 3)),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 10),
-                            child: Image.asset('assets/logo_uber.png',
-                                height: 50,
-                                width: 40),
-                          ),
-                          SizedBox(height: 25),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Uber', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                                Text('Distância: ${(distanciaUber! / 1000).toStringAsFixed(2)} km'),
-                              ],
-                            ),
-                          ),
-                          Text('R\$ ${precoUber!.toStringAsFixed(2)}', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 16)),
-                        ],
-                      ),
-                    ),
-                  ),
-                  //99APP
-                  GestureDetector(
-                    onTap: mostrarDialogo99,
-                    child: Container(
-                      width: double.infinity,
-                      margin: const EdgeInsets.only(top: 30),
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 3)),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 10),
-                            child: Image.asset('assets/logo99.png',
-                                height: 30,
-                                width: 40),
-                          ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('99 Taxi', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                                Text('Distância: ${(distancia99! / 1000).toStringAsFixed(2)} km'),
-                              ],
-                            ),
-                          ),
-                          Text('R\$ ${preco99!.toStringAsFixed(2)}', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 16)),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
