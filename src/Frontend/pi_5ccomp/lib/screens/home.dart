@@ -10,7 +10,9 @@ import 'package:url_launcher/url_launcher.dart';
 
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final VoidCallback onToggleTheme;
+
+  const HomePage({super.key, required this.onToggleTheme});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -153,6 +155,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       drawer: Drawer(
         child: ListView(
@@ -166,7 +171,8 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset('assets/logo_cinza.png',
+                  Image.asset(
+                  'assets/logo_cinza.png',
                   height: 80),
                 ],
               )
@@ -206,11 +212,23 @@ class _HomePageState extends State<HomePage> {
                 Navigator.of(context).pushReplacementNamed('/');
               },
             ),
+            Padding(
+              padding: const EdgeInsets.only(top: 400),
+              child: ListTile(
+                leading: Icon(Icons.brightness_6),
+                title: Text("Alterar Tema"),
+                onTap: (){
+                  Navigator.pop(context);
+                  widget.onToggleTheme();
+                },
+              ),
+            ),
           ],
         ),
       ),
       appBar: AppBar(
-        title: Image.asset('assets/logo_preta.png',
+        title: Image.asset(
+            isDarkMode ? 'assets/logo_cinza.png' : 'assets/logo_preta.png',
             height: 60),
         centerTitle: true,
         leading: Builder(
@@ -242,7 +260,7 @@ class _HomePageState extends State<HomePage> {
                 )
             ),),
           Padding(
-            padding: EdgeInsets.only(left: 30, right: 30, top: 40),
+            padding: EdgeInsets.only(left: 30, right: 30, top: 20),
             child: Column(
               children: [
                 Row(
@@ -252,6 +270,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           TextFormField(
                             controller: origemController,
+                            style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
                               hintText: "Local Inicial",
                               filled: true,
@@ -267,6 +286,7 @@ class _HomePageState extends State<HomePage> {
                           const SizedBox(height: 10),
                           TextFormField(
                             controller: destinoController,
+                            style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
                               hintText: "Destino Final",
                               filled: true,
@@ -329,8 +349,8 @@ class _HomePageState extends State<HomePage> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('Uber', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                                    Text('Distância: ${(distanciaUber! / 1000).toStringAsFixed(2)} km'),
+                                    Text('Uber', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.black)),
+                                    Text('Distância: ${(distanciaUber! / 1000).toStringAsFixed(2)} km', style: TextStyle(color: Colors.black)),
                                   ],
                                 ),
                               ),
@@ -365,8 +385,8 @@ class _HomePageState extends State<HomePage> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('99 Taxi', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                                    Text('Distância: ${(distancia99! / 1000).toStringAsFixed(2)} km'),
+                                    Text('99 Taxi', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.black)),
+                                    Text('Distância: ${(distancia99! / 1000).toStringAsFixed(2)} km', style: TextStyle(color: Colors.black),),
                                   ],
                                 ),
                               ),

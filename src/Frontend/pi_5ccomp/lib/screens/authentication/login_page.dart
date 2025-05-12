@@ -6,7 +6,9 @@ import '../../services/auth_services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key, required String title});
+  final VoidCallback onToggleTheme;
+
+  const LoginPage({super.key, required this.onToggleTheme, required title});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -85,6 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               TextFormField(
+                style: TextStyle(color: Colors.black),
                 controller: emailController,
                 decoration: getAuthenticationInputDecoration("Digite seu email"),
               ),
@@ -97,6 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               TextFormField(
+                style: TextStyle(color: Colors.black),
                 controller: passwordController,
                 decoration: getAuthenticationInputDecoration("Digite sua senha"),
                 obscureText: true,
@@ -139,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => HomePage(onToggleTheme: widget.onToggleTheme)),
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(

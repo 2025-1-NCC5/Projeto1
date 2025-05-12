@@ -7,7 +7,7 @@ class AuthController {
     await Future.delayed(Duration(seconds: 6));
     Navigator.pushReplacement(context,MaterialPageRoute<void>(
         builder: (BuildContext context) =>
-            LoginPage(title: "Home page"))
+            LoginPage(title: "Home page", onToggleTheme: () {  },))
     );
   }
 }

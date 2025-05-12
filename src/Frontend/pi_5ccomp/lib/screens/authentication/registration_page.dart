@@ -44,7 +44,7 @@ class RegistrationPage extends StatelessWidget {
                     Navigator.pushReplacement(
                       context,
                       PageRouteBuilder(
-                          pageBuilder: (context, animation, secundaryAnimation) => const LoginPage(title: "Home page"),
+                          pageBuilder: (context, animation, secundaryAnimation) => LoginPage(title: "Home page", onToggleTheme: (){},),
                           transitionsBuilder: (context, animation, secondaryAnimation, child) {
                             final offsetAnimation = Tween<Offset>(
                               begin: Offset(-1.0, 0.0),
@@ -86,6 +86,7 @@ class RegistrationPage extends StatelessWidget {
                   child: Text("E-mail", style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
                 TextFormField(
+                  style: TextStyle(color: Colors.black),
                   controller: emailController,
                   decoration: getAuthenticationInputDecoration("Digite seu email"),
                 ),
@@ -95,6 +96,7 @@ class RegistrationPage extends StatelessWidget {
                   child: Text("Senha", style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
                 TextFormField(
+                  style: TextStyle(color: Colors.black),
                   controller: passwordController,
                   decoration: getAuthenticationInputDecoration("Digite sua senha"),
                   obscureText: true,
@@ -105,6 +107,7 @@ class RegistrationPage extends StatelessWidget {
                   child: Text("Confirme sua senha", style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
                 TextFormField(
+                  style: TextStyle(color: Colors.black),
                   controller: confirmPasswordController,
                   decoration: getAuthenticationInputDecoration("Confirme sua senha"),
                   obscureText: true,
@@ -156,7 +159,7 @@ String errorMessage = "";
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const LoginPage(title: "Home page")),
+        MaterialPageRoute(builder: (context) => LoginPage(title: "Home page", onToggleTheme: () {  },)),
       );
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(

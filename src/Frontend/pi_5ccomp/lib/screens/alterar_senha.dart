@@ -80,8 +80,11 @@ class _AlterarSenhaPageState extends State<AlterarSenhaPage> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       appBar: AppBar(title: const Text("Alterar Senha")),
       body: Padding(
@@ -90,22 +93,26 @@ class _AlterarSenhaPageState extends State<AlterarSenhaPage> {
           key: _formKey,
           child: Column(
             children: [
-              Image.asset('assets/logo_preta.png',
+              Image.asset(
+                  isDarkMode ? 'assets/logo_cinza.png' : 'assets/logo_preta.png',
                   height: 80),
               const SizedBox(height: 30),
               TextFormField(
+                style: TextStyle(color: Colors.black),
                 controller: _senhaAtualController,
                 obscureText: true,
                 decoration: getAuthenticationInputDecoration("Senha Atual")
               ),
               const SizedBox(height: 20),
               TextFormField(
+                style: TextStyle(color: Colors.black),
                 controller: _novaSenhaController,
                 obscureText: true,
                 decoration: getAuthenticationInputDecoration("Nova Senha")
               ),
               const SizedBox(height: 20),
               TextFormField(
+                style: TextStyle(color: Colors.black),
                 controller: _confirmarSenhaController,
                 obscureText: true,
                 decoration: getAuthenticationInputDecoration("Confirmar Nova Senha")

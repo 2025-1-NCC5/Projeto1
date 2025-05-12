@@ -169,20 +169,20 @@ class HistoricoViagensPage extends StatelessWidget {
                       margin: const EdgeInsets.all(16),
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).cardColor,
                         borderRadius: BorderRadius.circular(20),
-                        boxShadow: const [
-                          BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 3)),
+                        boxShadow: [
+                          BoxShadow(color: Theme.of(context).shadowColor, blurRadius: 6, offset: Offset(0, 3)),
                         ],
                       ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Padding(padding: EdgeInsets.only(top: 15),
-                          child: const Icon(
+                          Icon(
                               Icons.location_on,
-                              size: 32,),
-                  ),
+                              size: 32,
+                              color: Theme.of(context).iconTheme.color,),
                           const SizedBox(width: 12),
                           Expanded(
                             child: Column(
@@ -195,7 +195,6 @@ class HistoricoViagensPage extends StatelessWidget {
                             ),
                           ),
                           IconButton(
-                            padding: EdgeInsets.only(top: 20, left: 10),
                             icon: const Icon(Icons.delete, color: Color.fromARGB(255, 28, 140, 164)),
                             onPressed: () => confirmarExclusaoIndividual(context, doc.id),
                           ),
