@@ -14,9 +14,9 @@
 
 ## Descrição
 
-<p align="center">
-<img src="![1](https://github.com/user-attachments/assets/aa79b81e-22dd-4d94-83ec-e395bebe6d86)" alt="Logo Uba Run" border="0">
-</p>
+  <div align="center">
+  <img src="https://github.com/user-attachments/assets/9dcd8501-bd31-4990-863c-4fa01d15d6a6" width="400px"/>
+  </div><br>
 
 
 UBA Run é uma empresa que quer entregar o melhor do mercado de estimador de preços de aplicativos de carona.
