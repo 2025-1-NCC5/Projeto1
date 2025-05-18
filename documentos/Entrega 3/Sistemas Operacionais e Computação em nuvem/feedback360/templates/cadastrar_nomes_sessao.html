@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nomes da Avaliação</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-color: #f2f4f8;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            width: 400px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button, input[type="submit"] {
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .add-btn {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <form action="/avaliar" method="post">
+        <h2>Insira os nomes a serem avaliados</h2>
+        <div id="nomes">
+            <input type="text" name="avaliado" placeholder="Nome do avaliado" required>
+        </div>
+        <button type="button" class="add-btn" onclick="addInput()">Adicionar outro</button>
+        <br>
+        <input type="submit" value="Iniciar Avaliação">
+    </form>
+
+    <script>
+        function addInput() {
+            const input = document.createElement("input");
+            input.type = "text";
+            input.name = "avaliado";
+            input.placeholder = "Nome do avaliado";
+            input.required = true;
+            document.getElementById("nomes").appendChild(input);
+        }
+    </script>
+</body>
+</html>

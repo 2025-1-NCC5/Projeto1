@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Relatório Individual - {{ nome }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Relatório de: {{ nome }}</h2>
+    <div style="text-align: center;">
+        <img src="{{ url_for('static', filename='graficos/' + nome + '.png') }}" alt="Gráfico de {{ nome }}" style="max-width: 600px; width: 90%;">
+    </div>
+    <br>
+    <div style="text-align: center;">
+        <a href="/report"><button>Voltar</button></a>
+    </div>
+</body>
+</html>

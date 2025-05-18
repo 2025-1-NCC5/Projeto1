@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Avaliar {{ nome }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <form action="/submit/{{ nome }}/{{ index }}" method="post">
+        <h2>Avalie {{ nome }} ({{ index + 1 }} de {{ total }})</h2>
+
+        <input type="hidden" name="session_id" value="{{ session_id }}">
+
+        <label>Comunicação:</label>
+        <input type="number" name="comunicacao" min="1" max="5" required><br>
+
+        <label>Empatia:</label>
+        <input type="number" name="empatia" min="1" max="5" required><br>
+
+        <label>Liderança:</label>
+        <input type="number" name="lideranca" min="1" max="5" required><br>
+
+        <label>Proatividade:</label>
+        <input type="number" name="proatividade" min="1" max="5" required><br>
+
+        <input type="submit" value="Enviar Feedback">
+    </form>
+</body>
+</html>

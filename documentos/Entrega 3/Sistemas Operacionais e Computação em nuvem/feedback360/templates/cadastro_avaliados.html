@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Início</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            gap: 40px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 40px 50px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .card form {
+            display: flex;
+            justify-content: center;
+        }
+
+        .card button {
+            padding: 12px 24px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .card button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Botão para iniciar nova sessão de avaliação -->
+        <div class="card">
+            <form action="/nova-sessao" method="get">
+                <button type="submit">Iniciar Nova Avaliação</button>
+            </form>
+        </div>
+
+        <!-- Botão para visualizar avaliações existentes -->
+        <div class="card">
+            <form action="/report" method="get">
+                <button type="submit">Ver Avaliações Anteriores</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
