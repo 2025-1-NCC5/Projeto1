@@ -15,8 +15,7 @@
 ## Descrição
 
 <p align="center">
-<img src="![1](https://github.com/user-attachments/assets/51838dd5-2890-4289-bacf-50743e36cd4d)" alt="Logo Uba Run" border="0">
-  Game by <a href="http://www.nyphotographic.com/">Nick Youngson</a> <a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> <a href="http://pix4free.org/">Pix4free</a>
+<img src="![1](https://github.com/user-attachments/assets/aa79b81e-22dd-4d94-83ec-e395bebe6d86)" alt="Logo Uba Run" border="0">
 </p>
 
 
