@@ -159,8 +159,10 @@ class HistoricoViagensPage extends StatelessWidget {
 
                   final origem = data['origem'] ?? 'Origem desconhecida';
                   final destino = data['destino'] ?? 'Destino desconhecido';
-                  final preco = (data['preco_estimado'] ?? 0).toStringAsFixed(2);
-                  final distanciaKm = ((data['distancia_metros'] ?? 0) / 1000).toStringAsFixed(1);
+                  final precoUber = (data['preco_uber'] ?? 0).toStringAsFixed(2);
+                  final distanciaUber = ((data['distancia_uber'] ?? 0) / 1000).toStringAsFixed(1);
+                  final preco99 = (data['preco_99'] ?? 0).toStringAsFixed(2);
+                  final distancia99 = ((data['distancia_99'] ?? 0) / 1000).toStringAsFixed(1);
 
                   return GestureDetector(
                     onTap: () => mostrarDialogoEscolhaApp(context, destino),
@@ -190,7 +192,8 @@ class HistoricoViagensPage extends StatelessWidget {
                               children: [
                                 Text('$origem → $destino', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                                 const SizedBox(height: 4),
-                                Text('Preço: R\$ $preco - Distância: $distanciaKm km'),
+                                Text('Uber: R\$ $precoUber'),
+                                Text('99: R\$ $preco99'),
                               ],
                             ),
                           ),

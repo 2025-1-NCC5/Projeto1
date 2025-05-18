@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
       return;
     }
 
-    final flaskApiUrl = 'http://15.229.102.105:3001/predict';
+    final flaskApiUrl = 'http://15.229.102.105:5000/predict';
 
     try {
       final response = await http.post(
@@ -49,8 +49,16 @@ class _HomePageState extends State<HomePage> {
 
       if (response.statusCode == 200) {
         final result = json.decode(response.body);
-        final precoValor = (result['price'] as num).toDouble();
-        final distanciaValor = (result['distance_m'] as num).toDouble();
+        print("📦 Resposta da API: $result");
+
+        final uber = result['uber'];
+        final app99 = result['app99'];
+
+        final precoUberValor = (uber['price'] as num).toDouble();
+        final distanciaUberValor = (uber['distance_m'] as num).toDouble();
+
+        final preco99Valor = (app99['price'] as num).toDouble();
+        final distancia99Valor = (app99['distance_m'] as num).toDouble();
 
         final user = FirebaseAuth.instance.currentUser;
         if (user != null) {
@@ -59,30 +67,36 @@ class _HomePageState extends State<HomePage> {
             'email': user.email,
             'origem': origem,
             'destino': destino,
-            'preco_estimado': precoValor,
-            'distancia_metros': distanciaValor,
+            'preco_uber': precoUberValor,
+            'preco_uber': precoUberValor,
+            'distancia_uber': distanciaUberValor,
+            'preco_99': preco99Valor,
+            'distancia_99': distancia99Valor,
             'timestamp': FieldValue.serverTimestamp(),
           });
         }
 
         setState(() {
-          precoUber = precoValor;
-          distanciaUber = distanciaValor;
-
-          preco99 = precoValor;
-          distancia99 = distanciaValor;
+          precoUber = precoUberValor;
+          distanciaUber = distanciaUberValor;
+          preco99 = preco99Valor;
+          distancia99 = distancia99Valor;
         });
+
       } else {
+        print("❌ Erro da API Flask: ${response.body}");
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Erro na API Flask: ${response.statusCode}')),
         );
       }
     } catch (e) {
+      print("❌ Erro ao consultar API: $e");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Erro ao consultar a API: $e')),
       );
     }
   }
+
   Future<void> abrirUber() async {
     const url = 'uber://';
     if (await canLaunchUrl(Uri.parse(url))) {

@@ -1,0 +1,1 @@
+["cod_provedor", "cod_categoria", "cod_corrida", "cod_companhia", "num_latitude_origem", "num_longitude_origem", "num_latitude_destino", "num_longitude_destino", "hora", "dia_semana", "flg_dia_util", "distancia_api_m", "duracao_api_s", "estado_origem_cod", "estado_destino_cod"]

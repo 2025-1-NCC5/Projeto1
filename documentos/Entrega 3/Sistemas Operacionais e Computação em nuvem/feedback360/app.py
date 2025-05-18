@@ -39,9 +39,10 @@ def init_db():
 def index():
     return render_template('cadastro_avaliados.html')
 
+# nova sessão
 @app.route('/nova-sessao')
 def nova_sessao():
-    flask_session['session_id'] = str(uuid.uuid4())  # nova sessão
+    flask_session['session_id'] = str(uuid.uuid4())  
     return render_template('cadastrar_nomes_sessao.html')
 
 @app.route('/cadastrar', methods=['POST'])
