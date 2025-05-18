@@ -6,9 +6,9 @@
 
 # UBA Run - Estimador de preços de corridas
 
-## Grupo Uba
+## Grupo Uba Run
 
-## Integrantes: <a href="https://github.com/GuiAlvesOliveira">Guilherme Alves de Olveira</a>, <a href="https://github.com/jjoaoplp">João Pedro Lima Paulo</a>, <a href="https://github.com/laramarina">Lara Marina</a>, <a href="https://github.com/Biaa099">Beaztriz Castilho</a>, <a href="https://github.com/GiuNogueiraSa">Giulia Nogueira</a>
+## Integrantes: <a href="https://github.com/GuiAlvesOliveira">Guilherme Alves de Olveira</a>, <a href="https://github.com/jjoaoplp">João Pedro Lima Paulo</a>, <a href="https://github.com/laramarina">Lara Marina</a>, <a href="https://github.com/Biaa099">Beatriz Castilho</a>, <a href="https://github.com/GiuNogueiraSa">Giulia Nogueira</a>
 
 ## Professores Orientadores: <a href="https://www.linkedin.com/in/remuniz/">Renata Muniz</a>, <a href="">Vinicius Heltai</a>, <a href="https://www.linkedin.com/in/rafael-diogo-rossetti/">Rafael Rossetti</a>, <a href="https://www.linkedin.com/in/marcos-minoru-nakatsugawa/">Marcos Minoru</a>, <a href="https://www.linkedin.com/in/rodrigo-da-rosa-phd/">Rodrigo da Rosa</a>
 
